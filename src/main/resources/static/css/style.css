@@ -1,0 +1,323 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+a {
+    text-decoration: none;
+    color: #f2e9e4;
+}
+
+li {
+    list-style-type: none;
+}
+
+html, body {
+    font-family: Roboto, serif;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-content: stretch;
+    width: 100%;
+}
+
+body {
+    background-color: #c9ada7;
+    color: #f2e9e4;
+}
+
+#wrap {
+    width: 100%;
+    flex: 15;
+    background-color: white;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 0.2fr 1.4fr 1.4fr;
+    gap: 0px 0px;
+    grid-template-areas:
+    "header"
+    "main-screen"
+    "catalog";
+}
+
+.header {
+    background-color: #22223b;
+    color: #f2e9e4;
+    grid-area: header;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.main-screen {
+    background-color: #c9ada7;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    grid-area: main-screen;
+}
+
+.catalog {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    gap: 0px 0px;
+    grid-template-areas:
+    "author-1 author-2 author-3 author-4"
+    "author-1 author-2 author-3 author-4";
+    grid-area: catalog;
+}
+
+.author-1 {
+    background-color: #293241;
+    grid-area: author-1;
+    text-align: center;
+}
+
+.author-2 {
+    background-color: #3d5a80;
+    grid-area: author-2;
+    text-align: center;
+}
+
+.author-3 {
+    background-color: #293241;
+    grid-area: author-3;
+    text-align: center;
+}
+
+.author-4 {
+    background-color: #3d5a80;
+    grid-area: author-4;
+    text-align: center;
+}
+
+h1 {
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 72px;
+    line-height: 84px;
+    color: #22223b;
+    -webkit-text-stroke: 1px transparent;
+    -webkit-text-fill-color: #22223b;
+}
+
+h2 {
+    font-size: 36px;
+}
+
+footer {
+    flex: 1;
+    background-color: #22223b;
+    color: #f2e9e4;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+}
+
+.avatar {
+    margin: 10px;
+}
+
+.avatar-img {
+    width: 100%;
+    max-width: 252px;
+    height: auto;
+    border-radius: 126px;
+}
+
+/* Button */
+button {
+    display:inline-block;
+    padding:0;
+    width:25px;
+    height:25px;
+    border:none;
+}
+
+.button.play {
+    background-image: url(../assets/play-button.svg);
+    background-color: #c9ada7;
+    width: 100px;
+    height: 100px;
+    border-radius: 126px;
+}
+
+/*Burger Menu*/
+.menyu-navigatsig li a {
+    display: block;
+    padding: 18px 18px;
+    text-decoration: none;
+}
+
+.menyu-navigatsig li a:hover, .menyu-navigatsig .navigation-btn:hover {
+    color: black;
+}
+
+.menyu-navigatsig .logo {
+    display: block;
+    float: left;
+    font-size: 24px;
+    padding: 15px 12px;
+    text-decoration: none;
+}
+
+/* navigation */
+
+.menyu-navigatsig .navigation {
+    clear: both;
+    max-height: 0;
+    transition: max-height .2s ease-out;
+}
+
+/* navigation icon */
+
+.menyu-navigatsig .navigation-icon {
+    cursor: pointer;
+    display: inline-block;
+    float: right;
+    padding: 28px 20px;
+    position: relative;
+    user-select: none;
+}
+
+.menyu-navigatsig .navigation-icon .categorua {
+    background: #333;
+    display: block;
+    height: 2px;
+    position: relative;
+    transition: background .2s ease-out;
+    width: 18px;
+}
+
+.menyu-navigatsig .navigation-icon .categorua:before,
+.menyu-navigatsig .navigation-icon .categorua:after {
+    background: #333;
+    content: '';
+    display: block;
+    height: 100%;
+    position: absolute;
+    transition: all .2s ease-out;
+    width: 100%;
+}
+
+.menyu-navigatsig .navigation-icon .categorua:before {
+    top: 5px;
+}
+
+.menyu-navigatsig .navigation-icon .categorua:after {
+    top: -5px;
+}
+
+/* navigation btn */
+
+.menyu-navigatsig .navigation-btn {
+    display: none;
+}
+
+.menyu-navigatsig .navigation-btn:checked ~ .navigation {
+    max-height: 240px;
+}
+
+.menyu-navigatsig .navigation-btn:checked ~ .navigation-icon .categorua {
+    background: transparent;
+}
+
+.menyu-navigatsig .navigation-btn:checked ~ .navigation-icon .categorua:before {
+    transform: rotate(-45deg);
+}
+
+.menyu-navigatsig .navigation-btn:checked ~ .navigation-icon .categorua:after {
+    transform: rotate(45deg);
+}
+
+.menyu-navigatsig .navigation-btn:checked ~ .navigation-icon:not(.steps) .categorua:before,
+.menyu-navigatsig .navigation-btn:checked ~ .navigation-icon:not(.steps) .categorua:after {
+    top: 0;
+}
+
+/* 48em = 768px */
+
+@media (min-width: 48em) {
+    .menyu-navigatsig li {
+        float: left;
+    }
+    .menyu-navigatsig li a {
+        padding: 20px 30px;
+    }
+    .menyu-navigatsig .navigation {
+        clear: none;
+        float: right;
+        max-height: none;
+    }
+    .menyu-navigatsig .navigation-icon {
+        display: none;
+    }
+}
+/*Burger Menu*/
+
+/* Button */
+
+a:hover img {
+    opacity: 60%;
+}
+
+[class^="icon"] {
+    position: relative;
+    margin-right: 10px;
+    fill: #f2e9e4;
+}
+
+.track-button {
+    margin: 15px;
+}
+
+.footer {
+    width: 100%;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.header-div {
+    width: 100%;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.contacts {
+    float: left;
+}
+
+.copyright {
+    float: right;
+}
+
+.khisamov {
+    text-decoration: none;
+    color: #f2e9e4;
+}
+
+.khisamov:hover {
+    color: black;
+}
+
+.brand-name {
+    float: left;
+}
+
+.menu {
+    float: right;
+}
+
+
+
+@media (max-width: 756px) {
+    .button.play {
+        width: 75px;
+        height: 75px;
+    }
+}

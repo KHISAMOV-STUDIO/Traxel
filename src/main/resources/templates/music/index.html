@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<div th:each="music : ${musics}">
+    <a th:text="${music.getId() + ', ' + music.getAuthorName() + ', ' + music.getTitle() + ', ' + music.getYear() + ', ' + music.getPrice()}">music</a>
+</div>
+
+<br/>
+<hr/>
+
+<a th:href="@{/music/new}">Create new person</a>
+
+</body>
+</html>

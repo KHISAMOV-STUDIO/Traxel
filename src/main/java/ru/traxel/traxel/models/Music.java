@@ -4,7 +4,7 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "Music", schema = "public", catalog = "postgres")
-public class MusicEntity {
+public class Music {
     private Long id;
     private String authorName;
     private Integer year;
@@ -67,7 +67,7 @@ public class MusicEntity {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        MusicEntity that = (MusicEntity) o;
+        Music that = (Music) o;
 
         if (id != null ? !id.equals(that.id) : that.id != null) return false;
         if (authorName != null ? !authorName.equals(that.authorName) : that.authorName != null) return false;

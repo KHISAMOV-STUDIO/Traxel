@@ -4,7 +4,7 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "Cart", schema = "public", catalog = "postgres")
-public class CartEntity {
+public class Cart {
     private Long id;
     private String customerEmail;
 
@@ -34,7 +34,7 @@ public class CartEntity {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        CartEntity that = (CartEntity) o;
+        Cart that = (Cart) o;
 
         if (id != null ? !id.equals(that.id) : that.id != null) return false;
         if (customerEmail != null ? !customerEmail.equals(that.customerEmail) : that.customerEmail != null)
