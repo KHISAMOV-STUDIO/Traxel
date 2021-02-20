@@ -3,7 +3,7 @@ package ru.traxel.traxel.models;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "Cart", schema = "public", catalog = "postgres")
+@Table(name = "cart", schema = "public", catalog = "postgres")
 public class Cart {
     private Long id;
     private String customerEmail;
