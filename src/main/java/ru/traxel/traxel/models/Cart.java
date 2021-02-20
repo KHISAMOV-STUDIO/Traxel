@@ -3,10 +3,10 @@ package ru.traxel.traxel.models;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "cart", schema = "public", catalog = "postgres")
+@Table(name = "\"Cart\"", schema = "public", catalog = "postgres")
 public class Cart {
     private Long id;
-    private String customerEmail;
+    private String customeremail;
 
     @Id
     @GeneratedValue
@@ -20,13 +20,13 @@ public class Cart {
     }
 
     @Basic
-    @Column(name = "customerEmail")
-    public String getCustomerEmail() {
-        return customerEmail;
+    @Column(name = "customeremail")
+    public String getCustomeremail() {
+        return customeremail;
     }
 
-    public void setCustomerEmail(String customerEmail) {
-        this.customerEmail = customerEmail;
+    public void setCustomeremail(String customeremail) {
+        this.customeremail = customeremail;
     }
 
     @Override
@@ -37,7 +37,7 @@ public class Cart {
         Cart that = (Cart) o;
 
         if (id != null ? !id.equals(that.id) : that.id != null) return false;
-        if (customerEmail != null ? !customerEmail.equals(that.customerEmail) : that.customerEmail != null)
+        if (customeremail != null ? !customeremail.equals(that.customeremail) : that.customeremail != null)
             return false;
 
         return true;
@@ -46,7 +46,7 @@ public class Cart {
     @Override
     public int hashCode() {
         int result = id != null ? id.hashCode() : 0;
-        result = 31 * result + (customerEmail != null ? customerEmail.hashCode() : 0);
+        result = 31 * result + (customeremail != null ? customeremail.hashCode() : 0);
         return result;
     }
 }

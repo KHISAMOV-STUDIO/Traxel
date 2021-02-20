@@ -3,10 +3,10 @@ package ru.traxel.traxel.models;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "music", schema = "public", catalog = "postgres")
+@Table(name = "\"Music\"", schema = "public", catalog = "postgres")
 public class Music {
     private Long id;
-    private String authorName;
+    private String authorname;
     private Integer year;
     private String title;
     private Integer price;
@@ -23,13 +23,13 @@ public class Music {
     }
 
     @Basic
-    @Column(name = "authorName")
+    @Column(name = "authorname")
     public String getAuthorName() {
-        return authorName;
+        return authorname;
     }
 
-    public void setAuthorName(String authorName) {
-        this.authorName = authorName;
+    public void setAuthorName(String authorname) {
+        this.authorname = authorname;
     }
 
     @Basic
@@ -70,7 +70,7 @@ public class Music {
         Music that = (Music) o;
 
         if (id != null ? !id.equals(that.id) : that.id != null) return false;
-        if (authorName != null ? !authorName.equals(that.authorName) : that.authorName != null) return false;
+        if (authorname != null ? !authorname.equals(that.authorname) : that.authorname != null) return false;
         if (year != null ? !year.equals(that.year) : that.year != null) return false;
         if (title != null ? !title.equals(that.title) : that.title != null) return false;
         if (price != null ? !price.equals(that.price) : that.price != null) return false;
@@ -80,7 +80,7 @@ public class Music {
 
     @Override
     public int hashCode() {
-        int result = authorName != null ? authorName.hashCode() : 0;
+        int result = authorname != null ? authorname.hashCode() : 0;
         result = 31 * result + (year != null ? year.hashCode() : 0);
         result = 31 * result + (title != null ? title.hashCode() : 0);
         result = 31 * result + (price != null ? price.hashCode() : 0);

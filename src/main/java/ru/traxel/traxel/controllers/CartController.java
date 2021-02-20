@@ -39,7 +39,7 @@ public class CartController {
     @PostMapping("/new")
     public String create(@RequestParam(value="customeremail", required = true) String email) {
         Cart cart = new Cart();
-        cart.setCustomerEmail(email);
+        cart.setCustomeremail(email);
         cartDAO.save(cart);
         return "redirect:/cart/";
     }

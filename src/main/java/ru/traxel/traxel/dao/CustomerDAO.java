@@ -6,8 +6,11 @@ import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import ru.traxel.traxel.models.Cart;
 import ru.traxel.traxel.models.Customer;
+import ru.traxel.traxel.models.Music;
 
+import javax.persistence.TypedQuery;
 import java.util.List;
 
 @Component
@@ -39,14 +42,15 @@ public class CustomerDAO {
         }
     }
 
-    public List list() {
+    public List<Customer> list() {
         open();
         Transaction tx = null;
-        List list = null;
+        List<Customer> list = null;
 
         try {
             tx = session.beginTransaction();
-            list = session.createQuery("from Customer").list();
+            TypedQuery<Customer> query = session.createQuery("SELECT e FROM Customer e", Customer.class);
+            list = query.getResultList();
             tx.commit();
         }
         catch (HibernateException e) {

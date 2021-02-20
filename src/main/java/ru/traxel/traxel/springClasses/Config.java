@@ -5,6 +5,8 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.PropertySource;
+import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.orm.hibernate5.HibernateTransactionManager;
 import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
@@ -19,6 +21,7 @@ import java.util.Properties;
 
 @Configuration
 @ComponentScan("ru.traxel.traxel")
+@PropertySource("classpath:application.properties")
 @EnableWebMvc
 public class Config implements WebMvcConfigurer {
     private final ApplicationContext applicationContext;
@@ -42,6 +45,11 @@ public class Config implements WebMvcConfigurer {
     @Override
     public void configureDefaultServletHandling(DefaultServletHandlerConfigurer configurer) {
         configurer.enable("myCustomDefaultServlet");
+    }
+
+    @Bean
+    public static PropertySourcesPlaceholderConfigurer propertySourcesPlaceholderConfigurer() {
+        return new PropertySourcesPlaceholderConfigurer();
     }
 
     @Bean
@@ -109,7 +117,8 @@ public class Config implements WebMvcConfigurer {
                 "hibernate.dialect", "org.hibernate.dialect.PostgreSQLDialect");
         hibernateProperties.setProperty(
                 "hibernate.current_session_context_class", "thread");
-
+        hibernateProperties.setProperty(
+                "hibernate.hbm2ddl.auto", "none");
         return hibernateProperties;
     }
 

@@ -7,7 +7,9 @@ import org.hibernate.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import ru.traxel.traxel.models.Author;
+import ru.traxel.traxel.models.Music;
 
+import javax.persistence.TypedQuery;
 import java.util.List;
 
 @Component
@@ -38,14 +40,15 @@ public class AuthorDAO {
         }
     }
 
-    public List list() {
+    public List<Author> list() {
         open();
         Transaction tx = null;
-        List list = null;
+        List<Author> list = null;
 
         try {
             tx = session.beginTransaction();
-            list = session.createQuery("from Author").list();
+            TypedQuery<Author> query = session.createQuery("SELECT e FROM Author e", Author.class);
+            list = query.getResultList();
             tx.commit();
         }
         catch (HibernateException e) {

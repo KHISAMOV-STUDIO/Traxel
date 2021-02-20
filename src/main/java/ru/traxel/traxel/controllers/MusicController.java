@@ -37,7 +37,7 @@ public class MusicController {
     }
 
     @PostMapping("/new")
-    public String create(@RequestParam(value="authorName", required = true) String authorName,
+    public String create(@RequestParam(value="authorname", required = true) String authorName,
                          @RequestParam(value="year", required = true) int year,
                          @RequestParam(value="title", required = true) String title,
                          @RequestParam(value="price", required = true) int price) {
@@ -47,6 +47,6 @@ public class MusicController {
         music.setTitle(title);
         music.setPrice(price);
         musicDAO.save(music);
-        return "redirect:/index";
+        return "redirect:/music";
     }
 }
