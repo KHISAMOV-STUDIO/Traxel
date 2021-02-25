@@ -6,28 +6,29 @@ import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 import ru.traxel.traxel.models.Author;
-import ru.traxel.traxel.models.Music;
 
 import javax.persistence.TypedQuery;
 import java.util.List;
+import java.util.Optional;
 
 @Component
-public class AuthorDAO {
+@Transactional
+public class AuthorDAO implements StandartDAO<Author>{
     private final SessionFactory sessionFactory;
-
-    Session session;
 
     @Autowired
     public AuthorDAO(SessionFactory sessionFactory) {
         this.sessionFactory = sessionFactory;
     }
 
+    @Override
     public void save(Author a) {
-        open();
+        Session session = open();
         Transaction tx = null;
         try {
-            tx = session.beginTransaction();
+            tx = getTx(session);
             session.persist(a);
             tx.commit();
         }
@@ -36,17 +37,17 @@ public class AuthorDAO {
             e.printStackTrace();
         }
         finally {
-            close();
+            close(session);
         }
     }
 
+    @Override
     public List<Author> list() {
-        open();
+        Session session = open();
         Transaction tx = null;
         List<Author> list = null;
-
         try {
-            tx = session.beginTransaction();
+            tx = getTx(session);
             TypedQuery<Author> query = session.createQuery("SELECT e FROM Author e", Author.class);
             list = query.getResultList();
             tx.commit();
@@ -56,18 +57,26 @@ public class AuthorDAO {
             e.printStackTrace();
         }
         finally {
-            close();
+            close(session);
         }
         return list;
     }
 
-    public Author show(int id) {
-        open();
+    @Override
+    public Optional<Author> show(long id) {
+        Session session = open();
         Transaction tx = null;
+        boolean openSession = session == null;
+        if (openSession) {
+            session = open();
+            tx = session.getTransaction();
+        }
         Author a = null;
         try {
-            tx = session.beginTransaction();
-            a = session.load(Author.class, id);
+            if(openSession) {
+                tx = getTx(session);
+            }
+            a = session.get(Author.class, id);
             tx.commit();
         }
         catch (HibernateException e) {
@@ -75,16 +84,17 @@ public class AuthorDAO {
             e.printStackTrace();
         }
         finally {
-            close();
+            close(session);
         }
-        return a;
+        return Optional.ofNullable(a);
     }
 
+    @Override
     public void update(Author a) {
-        open();
+        Session session = open();
         Transaction tx = null;
         try {
-            tx = session.beginTransaction();
+            tx = getTx(session);
             session.update(a);
             tx.commit();
         }
@@ -93,17 +103,18 @@ public class AuthorDAO {
             e.printStackTrace();
         }
         finally {
-            close();
+            close(session);
         }
     }
 
-    public void delete(int id) {
-        get();
+    @Override
+    public void delete(long id) {
+        Session session = open();
         Transaction tx = null;
         Author a = null;
         try {
-            tx = session.beginTransaction();
-            a = session.load(Author.class, id);
+            tx = getTx(session);
+            a = session.get(Author.class, id);
             if(null != a){
                 session.delete(a);
             }
@@ -113,17 +124,18 @@ public class AuthorDAO {
             if (tx!=null) tx.rollback();
             e.printStackTrace();
         }
+        finally {
+            close(session);
+        }
     }
 
-    private void open() {
-        session = sessionFactory.openSession();
+    private Session open() {
+        return sessionFactory.openSession();
     }
-
-    private void get() {
-        session = sessionFactory.getCurrentSession();
+    private Transaction getTx(Session session) {
+        return session.beginTransaction();
     }
-
-    private void close() {
+    private void close(Session session) {
         session.close();
     }
 }

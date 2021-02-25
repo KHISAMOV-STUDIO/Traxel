@@ -6,15 +6,16 @@ import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import ru.traxel.traxel.models.Customer;
+import org.springframework.transaction.annotation.Transactional;
 import ru.traxel.traxel.models.Music;
 
-import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 import java.util.List;
+import java.util.Optional;
 
 @Component
-public class MusicDAO{
+@Transactional
+public class MusicDAO implements StandartDAO<Music>{
 
     private final SessionFactory sessionFactory;
 
@@ -23,11 +24,12 @@ public class MusicDAO{
         this.sessionFactory = sessionFactory;
     }
 
+    @Override
     public void save(Music a) {
-        Session session = get();
+        Session session = open();
         Transaction tx = null;
         try {
-            tx = session.beginTransaction();
+            tx = getTx(session);
             session.persist(a);
             tx.commit();
         }
@@ -35,15 +37,18 @@ public class MusicDAO{
             if (tx!=null) tx.rollback();
             e.printStackTrace();
         }
-
+        finally {
+            close(session);
+        }
     }
 
+    @Override
     public List<Music> list() {
-        Session session = get();
+        Session session = open();
         Transaction tx = null;
         List<Music> list = null;
         try {
-            tx = session.beginTransaction();
+            tx = getTx(session);
             TypedQuery<Music> query = session.createQuery("SELECT e FROM Music e", Music.class);
             list = query.getResultList();
             tx.commit();
@@ -52,30 +57,38 @@ public class MusicDAO{
             if (tx!=null) tx.rollback();
             e.printStackTrace();
         }
+        finally {
+            close(session);
+        }
         return list;
     }
 
-    public Music show(int id) {
+    @Override
+    public Optional<Music> show(long id) {
         Transaction tx = null;
         Music a = null;
-        Session session = get();
+        Session session = open();
         try {
-            tx = session.beginTransaction();
-            a = session.load(Music.class, id);
+            tx = getTx(session);
+            a = session.get(Music.class, id);
             tx.commit();
         }
         catch (HibernateException e) {
             if (tx!=null) tx.rollback();
             e.printStackTrace();
         }
-        return a;
+        finally {
+            close(session);
+        }
+        return Optional.ofNullable(a);
     }
 
+    @Override
     public void update(Music a) {
         Transaction tx = null;
-        Session session = get();
+        Session session = open();
         try {
-            tx = session.beginTransaction();
+            tx = getTx(session);
             session.update(a);
             tx.commit();
         }
@@ -83,15 +96,19 @@ public class MusicDAO{
             if (tx!=null) tx.rollback();
             e.printStackTrace();
         }
+        finally {
+            close(session);
+        }
     }
 
-    public void delete(int id) {
+    @Override
+    public void delete(long id) {
         Transaction tx = null;
-        Music a = null;
-        Session session = get();
+        Music a;
+        Session session = open();
         try {
-            tx = session.beginTransaction();
-            a = session.load(Music.class, id);
+            tx = getTx(session);
+            a = session.get(Music.class, id);
             if(null != a){
                 session.delete(a);
             }
@@ -101,16 +118,17 @@ public class MusicDAO{
             if (tx!=null) tx.rollback();
             e.printStackTrace();
         }
+        finally {
+            close(session);
+        }
     }
 
     private Session open() {
         return sessionFactory.openSession();
     }
-
-    private Session get() {
-        return sessionFactory.getCurrentSession();
+    private Transaction getTx(Session session) {
+        return session.beginTransaction();
     }
-
     private void close(Session session) {
         session.close();
     }

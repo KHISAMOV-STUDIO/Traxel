@@ -41,9 +41,12 @@
             <div class="avatar">
                 <img class="avatar-img" alt="Аватарка автора" th:src="@{assets/avatar.png}" width="252px" height="263px">
             </div>
-            <div class="author-name"><b>Thomas - Song</b></div>
+            <div class="author-name"><b th:text="${first}">Thomas</b>Song</b></div>
             <div class="track-button">
-                <button class="button play"></button>
+                <audio controls>
+                    <source th:src="@{assets/ssn.mp3}" type="audio/mpeg">
+                    Your browser does not support the audio element.
+                </audio>
             </div>
         </div>
         <div class="author-2">

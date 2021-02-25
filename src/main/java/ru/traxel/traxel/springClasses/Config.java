@@ -116,9 +116,9 @@ public class Config implements WebMvcConfigurer {
         hibernateProperties.setProperty(
                 "hibernate.dialect", "org.hibernate.dialect.PostgreSQLDialect");
         hibernateProperties.setProperty(
-                "hibernate.current_session_context_class", "thread");
-        hibernateProperties.setProperty(
                 "hibernate.hbm2ddl.auto", "none");
+        hibernateProperties.setProperty(
+                "show_sql", "true");
         return hibernateProperties;
     }
 
