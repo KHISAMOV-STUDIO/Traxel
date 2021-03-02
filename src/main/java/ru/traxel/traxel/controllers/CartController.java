@@ -21,15 +21,8 @@ public class CartController {
     @GetMapping
     public String index(Model model) {
         model.addAttribute("carts", cartDAO.list());
-        return "cart/index";
+        return "cart/cart";
     }
-
-    @GetMapping("/index")
-    public String cart(Model model) {
-        model.addAttribute("carts", cartDAO.list());
-        return "cart/index";
-    }
-
 
     @GetMapping("/new")
     public String newCart(@ModelAttribute("cart") Cart cart) {

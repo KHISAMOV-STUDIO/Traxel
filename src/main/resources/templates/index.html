@@ -3,12 +3,12 @@
 <head>
     <meta charset="utf-8">
     <title>Traxel</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Traxel - платформа для продажи музыки.">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <meta name="description" content="Traxel - платформа для продажи вашей музыки.">
     <meta name="author" content="KHISAMOV.Studio">
 
-    <link th:href="@{css/normalize.css}" rel="stylesheet">
-    <link th:href="@{css/style.css}" rel="stylesheet">
+    <link th:href="@{/css/normalize.css}" rel="stylesheet">
+    <link th:href="@{/css/style.css}" rel="stylesheet">
     <!--[if lt IE 9]>
     <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
@@ -17,90 +17,36 @@
         #wrap {display:table;height:100%}
     </style>
     <![endif]-->
-    <link rel="shortcut icon" th:href="@{assets/favicon.ico}">
+    <link rel="shortcut icon" href="../assets/favicon.ico">
 </head>
 <body>
-
-<div id="wrap">
-    <div class="header">
-        <div class="header-div">
-            <div class="menyu-navigatsig">
-                <a href="/index" class="logo">Traxel</a>
-                <input class="navigation-btn" type="checkbox" id="navigation-btn" />
-                <label class="navigation-icon" for="navigation-btn"><span class="categorua"></span></label>
-                <ul class="navigation">
-                    <li><a href="/music/index">Каталог</a></li>
-                    <li><a href="/login">Вход</a></li>
-                </ul>
-            </div>
-        </div>
+    <div class="wrapper">
+            <header class="header">
+                <div class="header__body responsive-wrapper">
+                    <div class="header__name">Traxel</div>
+                    <nav class="header__nav">
+                        <a href="/">Главная</a>
+                        <a href="/catalogue">Каталог</a>
+                        <a href="/cart">Корзина</a>
+                        <a href="/register">Регистрация</a>
+                        <button>Меню</button>
+                    </nav>
+                </div>
+            </header>
+            <main class="main">
+                <div class="main__body responsive-wrapper">
+                    <article class="widget">
+                        <img class="widget__image" src="../assets/sanya.jpg" alt="Image">
+                        <h2>Саня Молодой</h2>
+                        <h2>Владикавказ</h2>
+                    </article>
+                    <article class="widget">
+                        <img class="widget__image" src="../assets/sanya.jpg" alt="Image">
+                        <h2>Саня Молодой</h2>
+                        <h2>Троицк</h2>
+                    </article>
+                </div>
+            </main>
     </div>
-    <div class="main-screen"><h1>Traxel is a digital music marketplace</h1></div>
-    <div class="catalog">
-        <div class="author-1">
-            <div class="avatar">
-                <img class="avatar-img" alt="Аватарка автора" th:src="@{assets/avatar.png}" width="252px" height="263px">
-            </div>
-            <div class="author-name"><b th:text="${first}">Thomas</b>Song</b></div>
-            <div class="track-button">
-                <audio controls>
-                    <source th:src="@{assets/ssn.mp3}" type="audio/mpeg">
-                    Your browser does not support the audio element.
-                </audio>
-            </div>
-        </div>
-        <div class="author-2">
-            <div class="avatar">
-                <img class="avatar-img" alt="Аватарка автора" th:src="@{assets/avatar.png}" width="252px" height="263px">
-            </div>
-            <div class="author-name"><b>Thomas - Song</b></div>
-            <div class="track-button">
-                <button class="button play"></button>
-            </div>
-        </div>
-        <div class="author-3">
-            <div class="avatar">
-                <img class="avatar-img" alt="Аватарка автора" th:src="@{assets/avatar.png}" width="252px" height="263px">
-            </div>
-            <div class="author-name"><b>Thomas - Song</b></div>
-            <div class="track-button">
-                <button class="button play"></button>
-            </div>
-        </div>
-        <div class="author-4">
-            <div class="avatar">
-                <img class="avatar-img" alt="Аватарка автора" th:src="@{assets/avatar.png}" width="252px" height="263px">
-            </div>
-            <div class="author-name"><b>Thomas - Song</b></div>
-            <div class="track-button">
-                <button class="button play"></button>
-            </div>
-        </div>
-    </div>
-</div>
-
-<footer>
-    <div class="footer">
-        <div class="contacts">
-            <a href="#">
-                <img th:src="@{assets/telegram.svg}" alt="Telegram" class="icon" width="32px" height="auto">
-            </a>
-            <a href="#">
-                <img th:src="@{assets/vk.svg}" alt="VK" class="icon" width="32px" height="auto">
-            </a>
-            <a href="#">
-                <img th:src="@{assets/instagram.png}" alt="Instagram" class="icon" width="32px" height="auto">
-            </a>
-            <a href="#">
-                <img th:src="@{assets/twitter.png}" alt="Instagram" class="icon" width="32px" height="auto">
-            </a>
-            <a href="#">
-                <img th:src="@{assets/gmail.png}" alt="Instagram" class="icon" width="32px" height="auto">
-            </a>
-        </div>
-        <div class="copyright">Made by <a href="http://khisamov.studio" class="khisamov">KHISAMOV.Studio</a></div>
-    </div>
-</footer>
-
 </body>
 </html>
