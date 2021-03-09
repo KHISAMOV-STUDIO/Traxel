@@ -30,11 +30,6 @@ public class MainController {
         return "index";
     }
 
-    @GetMapping("/login")
-    public String login() {
-        return "register/login";
-    }
-
     private Music getMusic(long id) {
         Optional<Music> music = musicDAO.show(id);
 
