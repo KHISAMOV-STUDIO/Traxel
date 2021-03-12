@@ -36,21 +36,15 @@
         <main class="main">
             <div class="main__body responsive-wrapper">
                 <article class="widget">
-                    <form th:action="@{/register}" th:method="POST" th:object="${user}">
+                    <form th:action="@{/register}" th:method="POST">
                         <h2>Псевдоним</h2>
-                        <input th:field="*{nickname}" type="text" class="widget__input" placeholder="Например, Саня Молодой">
-                        <p th:each="error : ${#fields.errors('nickname')}"
-                           th:text="${error}">Ошибка валидации</p>
+                        <input  type="text" class="widget__input" placeholder="Например, Саня Молодой">
                         <h2>Электронная почта</h2>
-                        <input th:field="*{email}" type="email" class="widget__input" placeholder="Например, sanya@mail.com">
-                        <p th:each="error : ${#fields.errors('email')}"
-                           th:text="${error}">Ошибка валидации</p>
+                        <input  type="email" class="widget__input" placeholder="Например, sanya@mail.com">
                         <h2>Пароль</h2>
-                        <input th:field="*{password}" type="password" class="widget__input">
-                        <p th:each="error : ${#fields.errors('password')}"
-                           th:text="${error}">Ошибка валидации</p>
+                        <input  type="password" class="widget__input">
                         <h2>Повторите пароль</h2>
-                        <input th:field="*{matchingPassword}" type="password" class="widget__input">
+                        <input  type="password" class="widget__input">
                         <input type="submit" class="widget__button" value="Зарегистрироваться"></input>
                     </form>
                     <p>У вас уже есть аккаунт? <a href="/login">Войти</a></p>
